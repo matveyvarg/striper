@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div id="apiKey" data-key="{{STRIPE_KEY }}"></div>
+  <div class="card">
+    <div class="card-body">
+      <ul>
+        <li>Name: {{ object.name }}</li>
+        <li>Description: {{ object.description }}</li>
+        <li>Price: {{ object.price }}</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary" id="buyBtn" onclick="buyProduct(this, `/buy/{{ object.id }}`)">Buy</button>
+    </div>
+  </div>
+{% if STRIPE_USE_INTENT %}
+      <form id="payment-form" class="payment-card" style="display: none">
+        <div id="card-element"></div>
+        <button id="submit" class="pay-btn">
+          <div class="spinner hidden" id="spinner"></div>
+          <span id="button-text">Pay</span>
+        </button>
+        <p id="card-error" role="alert"></p>
+        <p class="result-message hidden">
+          Payment succeeded, see the result in your
+          <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+        </p>
+      </form>
+{% endif %}
+{% endblock content %}
+{% block javascript %}
+  <script src="https://js.stripe.com/v3/"></script>
+  {{ block.super }}
+{% endblock javascript %}

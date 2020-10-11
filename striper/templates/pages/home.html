@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="col-md-12">
+    {% for order in object_list %}
+      <div class="row mt-2">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <span>{{ order }}</span><a class="float-right btn btn-primary" href="{{ order.url }}">Buy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <a class="btn btn-primary create-order" href="{% url 'create_order' %}">Create Order</a>
+  </div>
+{% endblock content %}
+{% block javascript %}
+  {{ block.super }}
+  <script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}
