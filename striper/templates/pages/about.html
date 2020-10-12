@@ -1,1 +1,36 @@
 {% extends "base.html" %}
+{% block content %}
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <p>Generate sandboxed payment forms for items</p>
+        <div>
+          <strong>Authorization</strong>
+          --------
+
+          Login: user
+          Password: user
+        </div>
+        <div>
+          To create an **superuser account**, and be able to use admin use this command
+
+
+          $ docker-compose -f &lt;env-file&gt; run django python manage.py createsuperuser
+        </div>
+        <div>
+          <strong>Running tests with py.test</strong>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~
+          $ docker-compose -f &lt;env-file&gt; run django pytest
+
+        </div>
+      </div>
+      <div>
+        <strong>Running Application</strong>
+        ~~~~~~~~~~~~~~~~~~~
+
+        $ docker-compose -f local.yml up
+
+      </div>
+    </div>
+  </div>
+{% endblock content %}

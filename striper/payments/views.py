@@ -22,7 +22,6 @@ class ItemList(ListView):
     List all items
     """
     model = Item
-    template_name = "pages/home.html"
 
 
 class OrderCreate(CreateView):
