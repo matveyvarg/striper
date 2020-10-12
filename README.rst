@@ -26,9 +26,11 @@ Basic Commands
 Setting Up Your Users
 ^^^^^^^^^^^^^^^^^^^^^
 
-* To create an **superuser account**, and be able to use admin use this command::
+ To create an **superuser account**, and be able to use admin use this command
 
-    $ docker-compose -f <env-file> run django python manage.py createsuperuser
+::
+
+ $ docker-compose -f <env-file> run django python manage.py createsuperuser
 
 Running tests with py.test
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,5 +43,6 @@ Running Application
 ~~~~~~~~~~~~~~~~~~~
 
 ::
+
   $ docker-compose -f local.yml up
 
