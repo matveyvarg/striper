@@ -9,6 +9,7 @@ from striper.payments.tests.factories import ItemFactory
 pytestmark = pytest.mark.django_db
 
 STATUS_OK = 200
+STATUS_REDIRECTED = 302
 
 
 def test_index(rf: RequestFactory):
@@ -24,7 +25,7 @@ def test_index(rf: RequestFactory):
     assert response.status_code == STATUS_OK
 
 
-def test_order_crate_page(client: Client):
+def test_order_create_page(client: Client):
     """
     Should return 200 and form
     :param rf:
@@ -33,6 +34,16 @@ def test_order_crate_page(client: Client):
     Order.objects.create()
     response = client.get('/orders/')
     assert response.status_code == STATUS_OK
+
+
+def test_order_creation(client: Client):
+    count = Order.objects.count()
+    item = ItemFactory()
+    response = client.post('/orders/', {'items': [item.id]})
+
+    assert response.status_code == STATUS_REDIRECTED
+    assert Order.objects.count() == count + 1
+    assert item in Order.objects.last().items.all()
 
 
 def test_item_detail_page(client: Client):

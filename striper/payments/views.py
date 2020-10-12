@@ -17,6 +17,14 @@ class OrderList(ListView):
     template_name = "pages/home.html"
 
 
+class ItemList(ListView):
+    """
+    List all items
+    """
+    model = Item
+    template_name = "pages/home.html"
+
+
 class OrderCreate(CreateView):
     """
     Page with form for create order

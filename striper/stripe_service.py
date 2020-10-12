@@ -1,5 +1,5 @@
 import stripe
-
+import logging
 from typing import Union, List
 
 from django.conf import settings
@@ -10,6 +10,8 @@ from striper.payments.models import Order, Item
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+logger = logging.getLogger(__name__)
+
 
 def get_checkout_items(item: Union[Item, Order]) -> List[dict]:
     """
@@ -17,6 +19,7 @@ def get_checkout_items(item: Union[Item, Order]) -> List[dict]:
     :param item:
     :return:
     """
+    logger.debug("Generating items for checkout")
     if isinstance(item, Item):
         products = [item]
     else:
@@ -42,6 +45,7 @@ def create_payment(item: Union[Item, Order], request: HttpRequest) -> str:
     Creates PaymentIntent of Stripe
     :return:
     """
+    logger.debug(f"Creating payment with {'intent' if settings.STRIPE_USE_INTENT else 'checkout'}:")
     if settings.STRIPE_USE_INTENT:
         intent = stripe.PaymentIntent.create(
             amount=item.price,
@@ -55,6 +59,6 @@ def create_payment(item: Union[Item, Order], request: HttpRequest) -> str:
         line_items=items,
         mode='payment',
         success_url=request.build_absolute_uri(reverse('success')),
-        cancel_url=request.build_absolute_uri(reverse('cancel'))
+        cancel_url=request.build_absolute_uri(reverse('index'))
     )
     return checkout_session.id
