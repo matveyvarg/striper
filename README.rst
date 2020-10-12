@@ -55,4 +55,4 @@ Just set env variable STRIPE_USE_INTENT=True
 Notice
 ~~~~~~
 
-I think that keeping env variables in vcs is bad practise, but I placed it here, just for demonstration purposes.
+I think that keeping env variables in vcs is bad practise, but I placed it here, just for ci purposes
