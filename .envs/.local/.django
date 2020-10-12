@@ -1,0 +1,7 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+STRIPE_PUB_KEY=pk_test_51HaqJoDlqaKQnqbTkXVyJFSMVDC9w33uU2VXn0Amt15LsyhiPrZA8XSa9QguLTzcoyCWfFgWuftkufZbpoSpcwNG00P354lwJE
+STRIPE_SECRET_KEY=sk_test_51HaqJoDlqaKQnqbTzxe6Sz51uG2KUeo9cURvYeZLKt7BsUNbOMayyyLsI6NBc75wRxmAISxlkF8FmCaTEpGQNuPS00DkKD6Z6S
+STRIPE_USE_INTENT=False

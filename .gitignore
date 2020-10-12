@@ -327,4 +327,3 @@ striper/media/
 
 .ipython/
 .env
-.envs/*

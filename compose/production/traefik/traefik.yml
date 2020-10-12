@@ -6,55 +6,29 @@ entryPoints:
     # http
     address: ":80"
 
-  web-secure:
-    # https
-    address: ":443"
-
-certificatesResolvers:
-  letsencrypt:
-    # https://docs.traefik.io/master/https/acme/#lets-encrypt
-    acme:
-      email: "matveyvarg@gmail.com"
-      storage: /etc/traefik/acme/acme.json
-      # https://docs.traefik.io/master/https/acme/#httpchallenge
-      httpChallenge:
-        entryPoint: web
-
 http:
   routers:
     web-router:
-      rule: "Host(`striper.com`) || Host(`www.striper.com`)"
-      
+      rule: "Host(`159.89.110.209`) || Host(`localhost`)"
+
       entryPoints:
         - web
       middlewares:
-        - redirect
+        - base-auth
         - csrf
       service: django
 
-    web-secure-router:
-      rule: "Host(`striper.com`) || Host(`www.striper.com`)"
-      
-      entryPoints:
-        - web-secure
-      middlewares:
-        - csrf
-      service: django
-      tls:
-        # https://docs.traefik.io/master/routing/routers/#certresolver
-        certResolver: letsencrypt
 
   middlewares:
-    redirect:
-      # https://docs.traefik.io/master/middlewares/redirectscheme/
-      redirectScheme:
-        scheme: https
-        permanent: true
     csrf:
       # https://docs.traefik.io/master/middlewares/headers/#hostsproxyheaders
       # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
       headers:
         hostsProxyHeaders: ["X-CSRFToken"]
+    base-auth:
+      basicAuth:
+        users:
+          - "user:$2y$12$B15K69gQqKLuZqI.VIZ7RerEnycopmUy1W7Dk/ggSutjrku1eoQ0e "
 
   services:
     django:

@@ -14,7 +14,7 @@ class OrderForm(ModelForm):
 
     class Meta:
         model = Order
-        fields = 'items'  # I hide Discounts and Taxes
+        fields = ('items', )  # I hide Discounts and Taxes
 
     def __init__(self, *args, **kwargs):
         """
