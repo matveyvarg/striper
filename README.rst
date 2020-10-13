@@ -16,7 +16,8 @@ Generate sandboxed payment forms for items
 
 Authorization
 --------
-
+http://159.89.110.209/
+http://159.89.110.209/admin
 Login: user
 Password: user
 
